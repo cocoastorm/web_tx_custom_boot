@@ -3,3 +3,4 @@ _reference/
 __pycache__/
 venv/
 .env
+boot.dat
