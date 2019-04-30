@@ -2,6 +2,7 @@ from github import Github
 import urllib.request
 import tempfile
 import shutil
+import re
 import os
 
 class GithubHekate():
@@ -21,8 +22,18 @@ class GithubHekate():
     return releases
 
   def list_named_hekate_releases(self):
-    releases = self.list_hekate_releases()
-    return [{'id': r.id, 'name': r.tag_name} for r in releases]
+    releases = []
+
+    for release in self.list_hekate_releases():
+      match = re.search('^v([.\d]*)', release.tag_name)
+      
+      if match:
+        releases.append({ 'id': release.id, 'name': match.group(1) })
+
+    # https://stackoverflow.com/a/2574090/5332177
+    releases.sort(key=lambda s: [int(u) for u in s['name'].split('.')], reverse=True)
+
+    return releases
   
   def get_release_assets(self, id):
     hekate = self.get_hekate()
