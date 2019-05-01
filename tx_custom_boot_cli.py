@@ -17,7 +17,7 @@ def build(output):
   ls(releases)
 
   # let user pick the version they want
-  choice = click.prompt('Please enter your the release you want (#)', type=int)
+  choice = click.prompt('Please enter the release you want (#)', type=int)
 
   try:
     release = releases[choice - 1]
