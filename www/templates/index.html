@@ -14,12 +14,12 @@
         
         <br />
 
-        <form>
+        <form method="GET" action="/download">
           <div class="group">
             <label>Release</label>
             <select id="version" name="version">
               {% for release in releases %}
-                <option>{{ release['name'] }}</option>
+                <option value="{{ release['id'] }}">{{ release['name'] }}</option>
               {% endfor %}
             </select>
           </div>

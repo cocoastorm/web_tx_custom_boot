@@ -1,5 +1,6 @@
 import flask
 import hekate
+from .builder import CachedBuilder
 
 app = flask.Flask(__name__)
 
@@ -11,5 +12,15 @@ def index():
 
 @app.route('/download')
 def build_download():
-  resp = flask.make_response('To Be Implemented', 501)
-  return resp
+  version = flask.request.args.get('version')
+
+  if version is None:
+    return flask.abort(404)
+
+  cb = CachedBuilder()
+  bf = cb.get(int(version))
+
+  if bf:
+    return flask.send_file(str(bf), as_attachment=True, attachment_filename="boot.dat")
+  else:
+    return flask.abort(404)
