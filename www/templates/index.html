@@ -5,28 +5,51 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <title>TX Custom Boot</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='normalize.css') }}" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
   </head>
   <body>
     <div class="wrapper">
-      <div class="content">
-        <h3>TX Custom Boot</h3>
-        <p>Generate a boot.dat file from a Hekate release:</p>
-        
-        <br />
+      <h2 class="heading heading--main">TX Custom Boot</h2>
+
+      <article class="section">
+        <header>
+          <h4 class="heading heading--content">
+            What does this do?
+          </h4>
+          <p class="text">
+            This uses Github's API to download a specified version of Hekate
+            and uses a modified version of
+            CTCaer's <a href="https://gist.github.com/CTCaer/13c02c05daec9e674ba00ce5ac35f5be">gist</a>
+            to create a suitable <span class="code">boot.dat</span> file to use.
+          </p>
+        </header>
+      </article>
+
+      <article class="section">
+        <header>
+          <h4 class="heading heading--content">Generate the file!</h4>
+          <p class="text">
+            Select a version below and press download to get your <span class="code">boot.dat</span> file.
+          </p>
+        </header>
 
         <form method="GET" action="/download">
-          <div class="group">
-            <label>Release</label>
-            <select id="version" name="version">
+          <div class="group group--attn">
+            <label class="label">Version</label>
+            <select
+              id="version"
+              name="version"
+              class="select">
               {% for release in releases %}
                 <option value="{{ release['id'] }}">{{ release['name'] }}</option>
               {% endfor %}
             </select>
           </div>
 
-          <button type="submit">Download</button>
+          <button class="btn" type="submit">Download</button>
         </form>
-      </div>
+      </article>
     </div>
   </body>
 </html>
