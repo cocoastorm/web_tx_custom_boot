@@ -17,10 +17,10 @@ def build_download():
   if version is None:
     return flask.abort(404)
 
-  cb = CachedBuilder()
-  bf = cb.get(int(version))
+  r_id = int(version)
+  boot_file = CachedBuilder().get(r_id)
 
-  if bf:
-    return flask.send_file(str(bf), as_attachment=True, attachment_filename="boot.dat")
+  if boot_file:
+    return flask.send_file(str(boot_file), as_attachment=True, attachment_filename="boot.dat")
   else:
     return flask.abort(404)
