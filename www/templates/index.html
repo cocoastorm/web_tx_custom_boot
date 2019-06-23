@@ -41,6 +41,18 @@
           <p class="text">
             Select a version below and press download to get your <span class="code">boot.dat</span> file.
           </p>
+
+          {% with messages = get_flashed_messages() %}
+            {% if messages %}
+              <div class="error">
+                <ul>
+                {% for message in messages %}
+                  <li class="error__message">{{ message }}</li>
+                {% endfor %}
+                </ul>
+              </div>
+            {% endif %}
+          {% endwith %}
         </header>
 
         <form method="GET" action="/download">
