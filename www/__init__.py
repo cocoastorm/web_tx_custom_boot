@@ -1,0 +1,1 @@
+from .tx_custom_boot_web import app
