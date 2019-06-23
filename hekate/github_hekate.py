@@ -7,8 +7,10 @@ import os
 
 class GithubHekate():
   def __init__(self, github_token=""):
-    if github_token == "":
+    if github_token == '' and os.environ.get('GITHUB_TOKEN') != '':
       github_token = os.environ["GITHUB_TOKEN"]
+    else:
+      raise ValueError('could not find GITHUB_TOKEN')
 
     self.g = Github(github_token)
 
