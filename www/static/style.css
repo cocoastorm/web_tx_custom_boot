@@ -72,6 +72,10 @@ body {
   font-size: 0.7em;
 }
 
+.code--link {
+  font-size: 1em;
+}
+
 .group {
   max-width: 50%;
 }
