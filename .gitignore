@@ -1,7 +1,9 @@
 .vscode/
-_reference/
-__pycache__/
+*.egg
 *.egg-info/
+__pycache__/
+_reference/
+build/
 venv/
 .env
 boot.dat

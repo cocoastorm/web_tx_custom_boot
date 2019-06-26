@@ -12,6 +12,6 @@ setup(
     'PyGithub',
   ],
   entry_points={
-    "console_scripts": ["tx_custom_boot=tx_custom_boot_cli:build"],
+    "console_scripts": ["tx_custom_boot_cli=cli.tx_custom_boot_cli:build"],
   },
 )
