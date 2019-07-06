@@ -1,15 +1,17 @@
-from setuptools import setup
+from setuptools import find_packages, setup
 
 setup(
-  name="tx_custom_boot_cli",
+  name="tx_custom_boot",
   version='0.1',
-  py_modules=['tx_custom_boot_cli'],
+  packages=find_packages(),
+  include_package_data=True,
+  zip_safe=False,
   install_requires=[
-    'PyGithub',
     'Click',
+    'Flask',
+    'PyGithub',
   ],
-  entry_points='''
-    [console_scripts]
-    tx_custom_boot_cli=tx_custom_boot_cli:build
-  ''',
+  entry_points={
+    "console_scripts": ["tx_custom_boot_cli=cli.tx_custom_boot_cli:build"],
+  },
 )
