@@ -4,6 +4,7 @@
 __pycache__/
 _reference/
 build/
+dist/
 venv/
 .env
 boot.dat
