@@ -15,16 +15,23 @@ def index():
 
 def limit_download():
   now_unix = time.time()
-  last_unix = float(flask.session['date_last_access'])
 
-  now_dt = datetime.date.timestamp(now_unix)
+  if not 'downloads' in flask.session or flask.session['downloads'] is None:
+    flask.session['downloads'] = 0
+  
+  if not 'date_last_access' in flask.session or flask.session['date_last_access'] is None:
+    flask.session['date_last_access'] = str(now_unix)
+
+  downloads = flask.session['downloads']
+  date_last_access = flask.session['date_last_access']
+
+  last_unix = float(date_last_access)
+
+  now_dt = datetime.date.fromtimestamp(now_unix)
   last_dt = datetime.date.fromtimestamp(last_unix)
   date_difference = now_dt.day - last_dt.day
 
-  num_downloads = int(flask.session['downloads'])
-
-  if not num_downloads:
-    num_downloads = 0
+  num_downloads = int(downloads)
 
   # reset condition
   if date_difference > 0:
@@ -34,7 +41,7 @@ def limit_download():
     return 0, False
 
   # limit exceeded
-  if num_downloads >= 5 and date_difference < 0:
+  if num_downloads >= 5 or date_difference < 0:
     return num_downloads, True
 
   # increment count
